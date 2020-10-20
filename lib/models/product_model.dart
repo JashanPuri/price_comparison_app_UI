@@ -18,23 +18,13 @@ class ProductModel {
 }
 
 class ProductProvider with ChangeNotifier {
-  List<ProductModel> _flipkartProducts = [
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Flipkart'),
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Flipkart'),
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Flipkart'),
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Flipkart'),
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Flipkart')
-  ]; //dummy data
+  List<ProductModel> _flipkartProducts = [];
 
-  List<ProductModel> _amazonProducts = [
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Amazon')
-  ];
+  List<ProductModel> _amazonProducts = [];
 
-  List<ProductModel> _relianceProducts = [
-    // ProductModel(title: 'Iphone 11', price: '59000', siteName: 'Reliance')
-  ];
+  List<ProductModel> _relianceProducts = [];
 
-  // Here we will fetch from api and do all the logical stuff needed
+  
   List<ProductModel> get flipkartProducts {
     return [..._flipkartProducts];
   }
@@ -47,76 +37,57 @@ class ProductProvider with ChangeNotifier {
     return [..._relianceProducts];
   }
 
+  // Here we will fetch from api and do all the logical stuff needed
   Future<void> getAndFetchData(query) async {
     try {
-      final static_url = 'http://10.0.2.2:5000';
+      final staticUrl = 'http://10.0.2.2:5000';
+
+      final flipkartUrl = staticUrl + '/api/flipkart?query=' + query;
+      final amazonUrl = staticUrl + '/api/amazon?query=' + query;
+      final relianceUrl = staticUrl + '/api/reliance?query=' + query;
+      print(flipkartUrl);
+      print(relianceUrl);
+      print(amazonUrl);
 
       //FLIPKART
-      final flipkart_url = static_url + '/api/flipkart?query=' + query;
-      print(flipkart_url);
-
-      final _flipkartResponse = await http.get(flipkart_url);
-      final _flipkartBody =
-          jsonDecode(_flipkartResponse.body) as Map<String, dynamic>;
+      final _flipkartResponse = await http.get(flipkartUrl);
+      final _flipkartBody = jsonDecode(_flipkartResponse.body) as Map<String, dynamic>;
       // print(_flipkartBody);
       final _flipkartList = _flipkartBody['flipkart'] as List<dynamic>;
-      _flipkartProducts = _flipkartList
-          .map(
-            (product) => ProductModel(
-                title: product['title'],
-                price: product['price'],
-                url: product['link'],
-                siteName: 'flipkart'),
-          )
-          .toList() as List<ProductModel>;
+      _flipkartProducts = mapProducts(_flipkartList);
 
       //AMAZON
-      final amazon_url = static_url + '/api/amazon?query=' + query;
-      print(amazon_url);
-
-      final _amazonResponse = await http.get(amazon_url);
-      final _amazonBody =
-          jsonDecode(_amazonResponse.body) as Map<String, dynamic>;
-      // print(_flipkartBody);
+      final _amazonResponse = await http.get(amazonUrl);
+      final _amazonBody = jsonDecode(_amazonResponse.body) as Map<String, dynamic>;
       final _amazonList = _amazonBody['amazon'] as List<dynamic>;
-      if (_amazonList != null)
-      {
-        _amazonProducts = _amazonList
-          .map(
-            (product) => ProductModel(
-              title: product['title'],
-              price: product['price'],
-              url: product['link'],
-              siteName: 'reliance',
-            ),
-          )
-          .toList() as List<ProductModel>;
+      if (_amazonList != null) {
+        _amazonProducts = mapProducts(_amazonList);
       }
-      
 
       //RELIANCE
-      final reliance_url = static_url + '/api/reliance?query=' + query;
-      print(reliance_url);
-
-      final _relianceResponse = await http.get(reliance_url);
-      final _relianceBody =
-          jsonDecode(_relianceResponse.body) as Map<String, dynamic>;
-      // print(_flipkartBody);
+      final _relianceResponse = await http.get(relianceUrl);
+      final _relianceBody = jsonDecode(_relianceResponse.body) as Map<String, dynamic>;
       final _relianceList = _relianceBody['reliance'] as List<dynamic>;
-      _relianceProducts = _relianceList
-          .map(
-            (product) => ProductModel(
-              title: product['title'],
-              price: product['price'],
-              url: product['url'],
-              siteName: 'reliance',
-            ),
-          )
-          .toList() as List<ProductModel>;
+      _relianceProducts = mapProducts(_relianceList);
 
       notifyListeners();
+
     } catch (e) {
       print('Error = $e');
     }
   }
+
+  List<ProductModel> mapProducts(List<dynamic> products) {
+    return products
+        .map(
+          (product) => ProductModel(
+            title: product['title'],
+            price: product['price'],
+            url: product['link'],
+            siteName: 'reliance',
+          ),
+        )
+        .toList();
+  }
+
 }

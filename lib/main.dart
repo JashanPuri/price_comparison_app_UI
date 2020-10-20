@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import './screens/display_products_screen.dart';
 import './screens/home_screen.dart';
-import './screens/techNews.dart';
+import 'widgets/techNews.dart';
 
 void main() {
   runApp(MyApp());
