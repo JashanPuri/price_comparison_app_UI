@@ -9,55 +9,69 @@ class DisplayProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String query = ModalRoute.of(context).settings.arguments as String;
-    final productsProvider = Provider.of<ProductProvider>(context);
-    final flipkartProducts = productsProvider.flipkartProducts;
-    final amazonProducts = productsProvider.amazonProducts;
-    final relianceProducts = productsProvider.relianceProducts;
+    final productsProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    // final flipkartProducts = productsProvider.flipkartProducts;
+    // final amazonProducts = productsProvider.amazonProducts;
+    // final relianceProducts = productsProvider.relianceProducts;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Results showing for: $query'),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: flipkartProducts[index],
-                  );
-                },
-                itemCount: flipkartProducts.length,
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: amazonProducts[index],
-                  );
-                },
-                itemCount: amazonProducts.length,
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: relianceProducts[index],
-                  );
-                },
-                itemCount: relianceProducts.length,
-              ),
-            )
-          ],
-        ),
+      body: FutureBuilder(
+        future: productsProvider.getAndFetchData(query),
+        builder: (context, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Consumer<ProductProvider>(
+                    builder: (context, products, child) => Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      child: Column(
+                        children: [
+                          Text('Flipkart'),
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return ProductCard(
+                                  product: products.flipkartProducts[index],
+                                );
+                              },
+                              itemCount: products.flipkartProducts.length,
+                            ),
+                          ),
+                          Text('Reliance'),
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return ProductCard(
+                                  product: products.relianceProducts[index],
+                                );
+                              },
+                              itemCount: products.relianceProducts.length,
+                            ),
+                          ),
+                          Text('Amazon'),
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return ProductCard(
+                                  product: products.amazonProducts[index],
+                                );
+                              },
+                              itemCount: products.amazonProducts.length,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
       ),
     );
   }

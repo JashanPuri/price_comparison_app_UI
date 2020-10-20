@@ -14,11 +14,24 @@ class ProductCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(product.title),
+            Container(
+              width: 120,
+              height: 60,
+              child: Text(
+                product.title,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                // overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
-            Text(product.price)
+            Text(
+              product.price,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            )
           ],
         ),
       ),
