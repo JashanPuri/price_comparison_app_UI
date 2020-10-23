@@ -40,7 +40,7 @@ class ProductProvider with ChangeNotifier {
   // Here we will fetch from api and do all the logical stuff needed
   Future<void> getAndFetchData(query) async {
     try {
-      final staticUrl = 'http://10.0.2.2:5000';
+      final staticUrl = 'http://10.0.2.2:5000'; //call to local host
 
       final flipkartUrl = staticUrl + '/api/flipkart?query=' + query;
       final amazonUrl = staticUrl + '/api/amazon?query=' + query;
@@ -84,7 +84,7 @@ class ProductProvider with ChangeNotifier {
             title: product['title'],
             price: product['price'],
             url: product['link'],
-            siteName: 'reliance',
+            // siteName: 'reliance',
           ),
         )
         .toList();

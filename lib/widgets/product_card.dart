@@ -1,38 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart' as url;
+
 import 'package:price_comparison_app_ui/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
   ProductCard({this.product});
 
+  _launchUrl(String urlString) async{
+    if(await url.canLaunch(urlString)){
+      await url.launch(urlString);
+    } else {
+      throw 'Counld not launch URL $urlString';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(20),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              width: 120,
-              height: 60,
-              child: Text(
-                product.title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                // overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+    return InkWell(
+      onTap: () => _launchUrl(product.url),
+      child: Card(
+        margin: EdgeInsets.all(20),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                width: 120,
+                height: 60,
+                child: Text(
+                  product.title,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  // overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              product.price,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            )
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                product.price,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              )
+            ],
+          ),
         ),
       ),
     );
