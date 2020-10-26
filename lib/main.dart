@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import './models/news_model.dart';
 import 'package:price_comparison_app_ui/models/product_model.dart';
 import 'package:provider/provider.dart';
 
 import './screens/display_products_screen.dart';
 import './screens/home_screen.dart';
-import 'widgets/techNews.dart';
+import 'screens/techNews.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NewsProvider(),
+          
+          )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
