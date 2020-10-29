@@ -27,8 +27,9 @@ class NewsProvider with ChangeNotifier {
     return [..._news];
   }
 
-  Future getAndFetchNews() async {
+  Future<void> getAndFetchNews() async {
     try {
+      print(news);
       final newsUrl =
           'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?toPublishedDate=null&fromPublishedDate=null&pageSize=50&q=tech%20news&autoCorrect=true&pageNumber=1&withThumbnails=true';
       final header = <String, String>{
@@ -42,7 +43,7 @@ class NewsProvider with ChangeNotifier {
       //print("after body");
       //print('news body $_newsBody');
       final _newsList = _newsBody['value'] as List<dynamic>;
-      print(_newsList);
+      // print(_newsList);
       _news = _newsList.map((news) => NewsModel(
             description: news['description'],
             title: news['title'],
@@ -50,6 +51,8 @@ class NewsProvider with ChangeNotifier {
             imageUrl: news['image']['url'],
             more: news['url']
           )).toList();
+      
+      notifyListeners();
     } catch (e) {
       print('Error = $e');
     }
