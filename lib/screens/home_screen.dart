@@ -17,7 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Python Project'),
+        //title: Text('Python Project'),
+        elevation: 0,
       ),
       body: tabPages[currentTab],
       bottomNavigationBar: BottomNavigationBar(
