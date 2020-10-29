@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './models/news_model.dart';
 import 'package:price_comparison_app_ui/models/product_model.dart';
 import 'package:provider/provider.dart';
+import './constants.dart';
 
 import './screens/display_products_screen.dart';
 import './screens/home_screen.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: kBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: HomeScreen(),
