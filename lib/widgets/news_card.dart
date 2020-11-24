@@ -22,7 +22,7 @@ class NewsCard extends StatelessWidget {
     if (newsUrl.isNotEmpty) {
       await Share.share(
         newsUrl,
-        subject: 'Check this out !',
+        subject: 'Check out this new!', // used only when user shares through mail.
         sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
       );
     }
