@@ -27,7 +27,7 @@ class NewsCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15)
                         ),
               child: Container(
-                height: 230,
+                //height: 230,
                 width: double.infinity,
                 child: Column(
                   children: [
@@ -39,12 +39,12 @@ class NewsCard extends StatelessWidget {
                         )
                       ),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                      height: 80,
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      //height: 80,
                       child: Text(
                         news.title,
                         overflow: TextOverflow.clip,
-                        maxLines: 3,textScaleFactor: 1.2,
+                        textScaleFactor: 1.2,
                         style: TextStyle(
                           fontWeight: FontWeight.w500
                         ),
