@@ -19,12 +19,45 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
-          child: ListTile(
+          child: GestureDetector(
             onTap: () => _launchUrl(news.more),
-        leading: Image.network(news.imageUrl,),
+                      child: Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+              child: Container(
+                height: 230,
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                        child: Image.network(news.imageUrl,fit:BoxFit.cover,width: double.infinity,)
+                        )
+                      ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                      height: 80,
+                      child: Text(
+                        news.title,
+                        overflow: TextOverflow.clip,
+                        maxLines: 3,textScaleFactor: 1.2,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500
+                        ),
+                        )
+                      ),
+                ],),
+              ),
+              //onTap: () => _launchUrl(news.more),
+        //leading: Image.network(news.imageUrl,),
         
-        title: Text(news.title),
+        //title: Text(news.title),
       ),
+          ),
     );
   }
 }
