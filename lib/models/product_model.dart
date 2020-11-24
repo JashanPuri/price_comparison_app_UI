@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ProductModel {
-  String title;
-  String price;
-  String url;
-  String siteName;
+  final String title;
+  final String price;
+  final String url;
+  final String siteName;
+  final String imgUrl;
 
-  ProductModel({
-    @required this.title,
-    @required this.price,
-    this.url,
-    this.siteName,
-  });
+  ProductModel(
+      {@required this.title,
+      @required this.price,
+      this.url,
+      this.siteName,
+      this.imgUrl});
 }
 
 class ProductProvider with ChangeNotifier {
@@ -24,7 +25,6 @@ class ProductProvider with ChangeNotifier {
 
   List<ProductModel> _relianceProducts = [];
 
-  
   List<ProductModel> get flipkartProducts {
     return [..._flipkartProducts];
   }
@@ -51,14 +51,16 @@ class ProductProvider with ChangeNotifier {
 
       //FLIPKART
       final _flipkartResponse = await http.get(flipkartUrl);
-      final _flipkartBody = jsonDecode(_flipkartResponse.body) as Map<String, dynamic>;
+      final _flipkartBody =
+          jsonDecode(_flipkartResponse.body) as Map<String, dynamic>;
       // print(_flipkartBody);
       final _flipkartList = _flipkartBody['flipkart'] as List<dynamic>;
       _flipkartProducts = mapProducts(_flipkartList);
 
       //AMAZON
       final _amazonResponse = await http.get(amazonUrl);
-      final _amazonBody = jsonDecode(_amazonResponse.body) as Map<String, dynamic>;
+      final _amazonBody =
+          jsonDecode(_amazonResponse.body) as Map<String, dynamic>;
       final _amazonList = _amazonBody['amazon'] as List<dynamic>;
       if (_amazonList != null) {
         _amazonProducts = mapProducts(_amazonList);
@@ -66,12 +68,12 @@ class ProductProvider with ChangeNotifier {
 
       //RELIANCE
       final _relianceResponse = await http.get(relianceUrl);
-      final _relianceBody = jsonDecode(_relianceResponse.body) as Map<String, dynamic>;
+      final _relianceBody =
+          jsonDecode(_relianceResponse.body) as Map<String, dynamic>;
       final _relianceList = _relianceBody['reliance'] as List<dynamic>;
       _relianceProducts = mapProducts(_relianceList);
 
       notifyListeners();
-
     } catch (e) {
       print('Error = $e');
     }
@@ -81,13 +83,12 @@ class ProductProvider with ChangeNotifier {
     return products
         .map(
           (product) => ProductModel(
-            title: product['title'],
-            price: product['price'],
-            url: product['link'],
-            // siteName: 'reliance',
-          ),
+              title: product['title'],
+              price: product['price'],
+              url: product['link'],
+              // siteName: 'reliance',
+              ),
         )
         .toList();
   }
-
 }
