@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/search_bar.dart';
@@ -16,7 +17,7 @@ class HomeContent extends StatelessWidget {
               height: 140,
               width: double.infinity,
               alignment: Alignment.centerLeft,
-              padding:  EdgeInsets.only(left: width * 0.05),
+              padding: EdgeInsets.only(left: width * 0.05),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
@@ -51,9 +52,11 @@ class HomeContent extends StatelessWidget {
             ),
           ]),
         ),
+        // CachedNetworkImage(
+        //   imageUrl: 'https://m.media-amazon.com/images/I/714qRVfu2vL._AC_UY218_.jpg',
+        //   height: 100,
+        // ),
       ],
     );
   }
 }
-
-

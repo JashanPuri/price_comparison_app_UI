@@ -30,45 +30,53 @@ class DisplayProductsScreen extends StatelessWidget {
                     builder: (context, products, child) => Container(
                       height: MediaQuery.of(context).size.height,
                       width: double.infinity,
-                      child: Column(
-                        children: [
-                          Text('Flipkart'),
-                          Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return ProductCard(
-                                  product: products.flipkartProducts[index],
-                                );
-                              },
-                              itemCount: products.flipkartProducts.length,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Text('Amazon'),
+                            Container(
+                              height: 310,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return ProductCard(
+                                    product: products.amazonProducts[index],
+                                  );
+                                },
+                                itemCount: products.amazonProducts.length,
+                              ),
                             ),
-                          ),
-                          Text('Reliance'),
-                          Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return ProductCard(
-                                  product: products.relianceProducts[index],
-                                );
-                              },
-                              itemCount: products.relianceProducts.length,
+                            Text('Reliance'),
+                            Container(
+                              height: 310,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return ProductCard(
+                                    product: products.relianceProducts[index],
+                                  );
+                                },
+                                itemCount: products.relianceProducts.length,
+                              ),
                             ),
-                          ),
-                          Text('Amazon'),
-                          Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return ProductCard(
-                                  product: products.amazonProducts[index],
-                                );
-                              },
-                              itemCount: products.amazonProducts.length,
+                            Text('Flipkart'),
+                            Container(
+                              height: 310,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return ProductCard(
+                                    product: products.flipkartProducts[index],
+                                  );
+                                },
+                                itemCount: products.flipkartProducts.length,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

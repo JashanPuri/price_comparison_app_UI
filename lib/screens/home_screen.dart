@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //title: Text('Python Project'),
+        title: currentTab == 1 ? Text('We\'ve got some news for you!') : null,
         elevation: 0,
       ),
       body: tabPages[currentTab],

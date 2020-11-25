@@ -49,7 +49,7 @@ class ProductProvider with ChangeNotifier {
       print(relianceUrl);
       print(amazonUrl);
 
-      //FLIPKART
+      // FLIPKART
       final _flipkartResponse = await http.get(flipkartUrl);
       final _flipkartBody =
           jsonDecode(_flipkartResponse.body) as Map<String, dynamic>;
@@ -66,7 +66,7 @@ class ProductProvider with ChangeNotifier {
         _amazonProducts = mapProducts(_amazonList);
       }
 
-      //RELIANCE
+      // //RELIANCE
       final _relianceResponse = await http.get(relianceUrl);
       final _relianceBody =
           jsonDecode(_relianceResponse.body) as Map<String, dynamic>;
@@ -86,6 +86,7 @@ class ProductProvider with ChangeNotifier {
               title: product['title'],
               price: product['price'],
               url: product['link'],
+              imgUrl: product['imgUrl']
               // siteName: 'reliance',
               ),
         )
