@@ -8,6 +8,7 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Column(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           height: 170,
@@ -52,10 +53,17 @@ class HomeContent extends StatelessWidget {
             ),
           ]),
         ),
-        // CachedNetworkImage(
-        //   imageUrl: 'https://m.media-amazon.com/images/I/714qRVfu2vL._AC_UY218_.jpg',
-        //   height: 100,
-        // ),
+        // SizedBox.expand(),
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.all(50),
+            // color: Colors.white,
+            child: Image.asset(
+              'assets/bg2.jpeg',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       ],
     );
   }

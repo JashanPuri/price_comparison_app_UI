@@ -22,7 +22,7 @@ class ProductCard extends StatelessWidget {
       onTap: () => _launchUrl(product.url),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
           child: Column(

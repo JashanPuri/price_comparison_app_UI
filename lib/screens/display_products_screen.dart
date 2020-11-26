@@ -33,7 +33,11 @@ class DisplayProductsScreen extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text('Amazon'),
+                            SizedBox(height: 5,),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 7),
+                              child: Image.asset('assets/amazon_logo.jpg', width: 200,height: 60,),
+                            ),
                             Container(
                               height: 310,
                               width: double.infinity,
@@ -47,7 +51,10 @@ class DisplayProductsScreen extends StatelessWidget {
                                 itemCount: products.amazonProducts.length,
                               ),
                             ),
-                            Text('Reliance'),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 7),
+                              child: Image.asset('assets/reliance_logo.jpg', width: 200,height: 70,),
+                            ),
                             Container(
                               height: 310,
                               width: double.infinity,
@@ -61,7 +68,10 @@ class DisplayProductsScreen extends StatelessWidget {
                                 itemCount: products.relianceProducts.length,
                               ),
                             ),
-                            Text('Flipkart'),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Image.asset('assets/flipkart_logo.jpg', width: 200,),
+                            ),
                             Container(
                               height: 310,
                               width: double.infinity,
