@@ -16,9 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: currentTab == 0
-          ? Colors.grey[300]
-          : Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: currentTab == 1 ? Text('We\'ve got some news for you!') : null,
         elevation: 0,

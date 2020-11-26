@@ -43,6 +43,9 @@ class ProductCard extends StatelessWidget {
                         errorWidget: (context, url, error) => Center(
                           child: Text('Sorry could not load!'),
                         ),
+                        placeholder: (context, url) => Center(
+                          child: Text('Loading...'),
+                        ),
                       ),
                 // color: Colors.blue,
               ),

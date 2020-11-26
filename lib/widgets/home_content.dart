@@ -55,12 +55,15 @@ class HomeContent extends StatelessWidget {
         ),
         // SizedBox.expand(),
         Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(50),
-            // color: Colors.white,
-            child: Image.asset(
-              'assets/bg2.jpeg',
-              fit: BoxFit.cover,
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.all(50),
+              // color: Colors.white,
+              child: Image.asset(
+                'assets/bg2.jpeg',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
